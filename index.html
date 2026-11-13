@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STEP CHALLENGE</title>
+<meta name="theme-color" content="#C3EEFA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brand:      #C3EEFA;  /* สีหลักของเว็บ */
+    --brand-dark: #A9E4F5;  /* hover / ขอบบนพื้นสีหลัก */
+    --on-brand:   #0B2A52;  /* ตัวอักษรบนพื้นสีหลัก */
+    --on-brand-2: #2E5470;  /* ตัวอักษรรองบนพื้นสีหลัก */
+    --blue-900: #0B2A52;
+    --blue-700: #0A6A8A;    /* ตัวเลข ลิงก์ และจุดเน้นบนพื้นขาว */
+    --blue-600: #1586AA;
+    --blue-200: #A9E4F5;
+    --blue-100: #E1F6FD;
+    --blue-50:  #F3FBFE;
+    --line:     #CBE6F0;
+    --text:     #13233B;
+    --muted:    #56677F;
+    --white:    #FFFFFF;
+    --danger:   #B42318;
+    --danger-bg:#FDECEA;
+    --ok:       #0F6B3A;
+    --ok-bg:    #E7F6EE;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    font-family: "Anuphan", "Noto Sans Thai", "Leelawadee UI", Tahoma, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--blue-50);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  [hidden] { display: none !important; }
+
+  /* ---------- Header + tabs ---------- */
+  .top {
+    background: var(--brand);
+    color: var(--on-brand);
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+
+  .top-inner {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 28px 20px 16px;
+  }
+
+  .top h1 {
+    margin: 0;
+    font-size: clamp(28px, 6vw, 40px);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -.01em;
+  }
+
+  .top p {
+    margin: 6px 0 0;
+    color: var(--on-brand-2);
+  }
+
+  .tabs {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 12px;
+    display: flex;
+    gap: 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar { display: none; }
+
+  .tabs button {
+    appearance: none;
+    border: 0;
+    background: transparent;
+    color: var(--on-brand-2);
+    padding: 11px 16px;
+    font: inherit;
+    font-weight: 600;
+    border-radius: 12px 12px 0 0;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  .tabs button:hover { color: var(--on-brand); }
+
+  .tabs button[aria-selected="true"] {
+    background: var(--blue-50);
+    color: var(--blue-900);
+  }
+
+  .tabs button:focus-visible {
+    outline: 3px solid var(--blue-700);
+    outline-offset: -3px;
+  }
+
+  main {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 20px 16px 48px;
+  }
+
+  /* ---------- Generic blocks ---------- */
+  .panel {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+
+  .panel h2 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    line-height: 1.3;
+    color: var(--blue-900);
+  }
+
+  .panel h3 {
+    margin: 22px 0 8px;
+    font-size: 17px;
+    color: var(--blue-900);
+  }
+
+  .lead {
+    margin: 0 0 18px;
+    color: var(--muted);
+  }
+
+  .join-layout {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .demo-banner {
+    margin-bottom: 16px;
+    padding: 10px 14px;
+    border: 1px dashed var(--blue-600);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--blue-900);
+    font-size: 14px;
+  }
+
+  /* ---------- Rules ---------- */
+  .bonus-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .bonus-item {
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--blue-50);
+    border: 1px solid var(--line);
+  }
+
+  .bonus-amount {
+    display: block;
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--blue-700);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bonus-amount small {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .bonus-cond {
+    display: block;
+    margin-top: 6px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  .bonus-note {
+    display: block;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .rule-list {
+    margin: 0;
+    padding-left: 20px;
+  }
+
+  .rule-list li { margin-bottom: 4px; }
+
+  .formula {
+    margin: 0;
+    padding: 12px 14px;
+    border-left: 4px solid var(--blue-600);
+    background: var(--blue-50);
+    border-radius: 0 10px 10px 0;
+  }
+
+  .formula p { margin: 0; }
+  .formula p + p { margin-top: 4px; }
+
+  .example-table,
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .example-table th,
+  .example-table td,
+  .data-table th,
+  .data-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .example-table th,
+  .data-table th {
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 13px;
+    background: var(--blue-50);
+  }
+
+  .num {
+    text-align: right !important;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  .table-wrap table tr:last-child td { border-bottom: 0; }
+
+  /* ---------- Forms ---------- */
+  .field { margin-bottom: 14px; }
+
+  .row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  label,
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .hint {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .field-error {
+    display: block;
+    margin-top: 5px;
+    color: var(--danger);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  input,
+  select,
+  button { font: inherit; }
+
+  input[type="text"],
+  input[type="number"],
+  input[type="password"],
+  input[type="date"],
+  select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    background: var(--white);
+    color: var(--text);
+    font-size: 16px;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  select {
+    background-image: linear-gradient(45deg, transparent 50%, var(--blue-700) 50%), linear-gradient(135deg, var(--blue-700) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 20px, calc(100% - 13px) 20px;
+    background-size: 5px 5px;
+    background-repeat: no-repeat;
+    padding-right: 34px;
+  }
+
+  input[type="date"] { -webkit-appearance: auto; appearance: auto; }
+
+  input:focus,
+  select:focus {
+    outline: none;
+    border-color: var(--blue-600);
+    box-shadow: 0 0 0 3px var(--blue-100);
+  }
+
+  input[aria-invalid="true"],
+  select[aria-invalid="true"] { border-color: var(--danger); }
+
+  input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: 1.5px dashed var(--blue-200);
+    border-radius: 12px;
+    background: var(--blue-50);
+    font-size: 14px;
+  }
+
+  .choice-group {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .choice {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 46px;
+    padding: 10px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  .choice input { accent-color: var(--blue-700); width: 18px; height: 18px; margin: 0; }
+
+  .choice:has(input:checked) {
+    border-color: var(--blue-600);
+    background: var(--blue-50);
+  }
+
+  .choice:has(input:focus-visible) { box-shadow: 0 0 0 3px var(--blue-100); }
+
+  .check {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .check input { accent-color: var(--blue-700); width: 18px; height: 18px; margin-top: 3px; flex: none; }
+
+  .btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 18px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-weight: 600;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .btn { box-shadow: inset 0 0 0 1.5px var(--brand-dark), 0 2px 0 var(--brand-dark); }
+  .btn.secondary { box-shadow: none; }
+  .btn:hover { background: var(--brand-dark); }
+  .btn:disabled { opacity: .55; cursor: not-allowed; }
+
+  .btn:focus-visible,
+  .link-btn:focus-visible {
+    outline: 3px solid var(--blue-200);
+    outline-offset: 2px;
+  }
+
+  .btn.secondary {
+    background: var(--white);
+    color: var(--blue-700);
+    border: 1.5px solid var(--blue-200);
+  }
+
+  .btn.secondary:hover { background: var(--blue-50); }
+
+  .btn.small {
+    width: auto;
+    min-height: 38px;
+    padding: 6px 14px;
+    font-size: 14px;
+  }
+
+  .link-btn {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--blue-700);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  .message {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .message.success { background: var(--ok-bg); color: var(--ok); }
+  .message.error { background: var(--danger-bg); color: var(--danger); }
+  .message.info { background: var(--blue-100); color: var(--blue-900); }
+
+  .bonus-preview {
+    margin: 4px 0 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--brand);
+    color: var(--on-brand);
+  }
+
+  .bonus-preview strong {
+    display: block;
+    font-size: 24px;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bonus-preview span {
+    font-size: 14px;
+    color: var(--on-brand-2);
+  }
+
+  .switch-line {
+    margin: 16px 0 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .preview-wrap { margin-top: 10px; }
+
+  .preview-wrap img {
+    display: block;
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+
+  /* ---------- Name search (combobox) ---------- */
+  .combo { position: relative; }
+
+  .combo-list {
+    position: absolute;
+    z-index: 20;
+    left: 0;
+    right: 0;
+    top: calc(100% + 4px);
+    margin: 0;
+    padding: 4px;
+    list-style: none;
+    max-height: 264px;
+    overflow-y: auto;
+    background: var(--white);
+    border: 1.5px solid var(--blue-200);
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(11, 42, 82, .14);
+  }
+
+  .combo-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  .combo-list li[aria-selected="true"],
+  .combo-list li:hover { background: var(--blue-100); }
+
+  .combo-list li[aria-disabled="true"] {
+    cursor: not-allowed;
+    color: var(--muted);
+    background: transparent;
+  }
+
+  .combo-list li mark {
+    background: var(--brand);
+    color: inherit;
+    border-radius: 3px;
+  }
+
+  .combo-list .combo-note { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .combo-list .combo-empty { cursor: default; color: var(--muted); font-size: 14px; }
+  .combo-list .combo-empty:hover { background: transparent; }
+
+  .picked-ok {
+    display: block;
+    margin-top: 5px;
+    color: var(--ok);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .bd-row {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  /* ---------- Segmented control ---------- */
+  .seg {
+    display: inline-flex;
+    padding: 3px;
+    margin-bottom: 14px;
+    border-radius: 12px;
+    background: var(--blue-100);
+  }
+
+  .seg button {
+    border: 0;
+    background: transparent;
+    padding: 7px 18px;
+    border-radius: 9px;
+    font-weight: 600;
+    color: var(--blue-900);
+    cursor: pointer;
+  }
+
+  .seg button[aria-pressed="true"] {
+    background: var(--white);
+    color: var(--blue-700);
+    box-shadow: 0 1px 2px rgba(11, 42, 82, .15);
+  }
+
+  .seg button:focus-visible { outline: 3px solid var(--blue-200); }
+
+  .member-line {
+    display: block;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .team-card {
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--brand);
+    color: var(--on-brand);
+    margin-bottom: 12px;
+  }
+
+  .team-card .tc-name { font-size: 20px; font-weight: 700; }
+  .team-card .tc-sub { color: var(--on-brand-2); font-size: 14px; }
+
+  .team-card .tc-total {
+    display: block;
+    margin-top: 6px;
+    font-size: 28px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- Photo picker ---------- */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px; height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .photo-pick {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 168px;
+    margin: 0;
+    padding: 16px;
+    border: 2px dashed var(--blue-200);
+    border-radius: 16px;
+    background: var(--blue-50);
+    text-align: center;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  .photo-pick:hover { border-color: var(--blue-600); }
+
+  .photo-pick.has-photo {
+    border-style: solid;
+    border-color: var(--blue-600);
+    background: var(--white);
+    padding: 10px;
+  }
+
+  .photo-pick.invalid { border-color: var(--danger); }
+
+  .photo-input:focus-visible + .photo-pick { box-shadow: 0 0 0 3px var(--blue-100); }
+
+  .photo-pick img {
+    display: block;
+    max-width: 100%;
+    max-height: 280px;
+    border-radius: 10px;
+  }
+
+  .photo-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--brand);
+    color: var(--on-brand);
+    display: grid;
+    place-items: center;
+  }
+
+  .photo-empty { display: flex; flex-direction: column; align-items: center; }
+  .photo-empty[hidden] { display: none !important; }
+
+  .section-break {
+    margin: 22px -22px 16px;
+    padding: 16px 22px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-break h3 { margin: 0 0 2px !important; }
+  .section-break p { margin: 0; color: var(--muted); font-size: 14px; }
+
+  @media (max-width: 560px) {
+    .section-break { margin-left: -16px; margin-right: -16px; padding-left: 16px; padding-right: 16px; }
+  }
+  .photo-title { font-weight: 700; color: var(--blue-900); font-size: 17px; }
+  .photo-sub { color: var(--muted); font-size: 13px; line-height: 1.5; }
+  .photo-change { color: var(--blue-700); font-weight: 600; font-size: 14px; }
+
+  .size-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--ok-bg);
+    color: var(--ok);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .thumb {
+    display: inline-block;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--white);
+    cursor: pointer;
+    overflow: hidden;
+    line-height: 0;
+    vertical-align: middle;
+  }
+
+  .thumb img { width: 44px; height: 44px; object-fit: cover; }
+
+  .lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: 94vw;
+    max-height: 90vh;
+  }
+
+  .lightbox::backdrop { background: rgba(11, 42, 82, .78); }
+
+  .lightbox img {
+    display: block;
+    max-width: 94vw;
+    max-height: 80vh;
+    border-radius: 12px;
+    background: var(--white);
+  }
+
+  .lightbox button {
+    display: block;
+    margin: 10px auto 0;
+  }
+
+  .demo-banner button { margin-left: 6px; font-size: 14px; }
+
+  /* ---------- Log view ---------- */
+  .who {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .who-name {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--blue-900);
+  }
+
+  .who-sub {
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .calc {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 6px;
+    margin: 4px 0 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--blue-50);
+    border: 1px solid var(--line);
+    text-align: center;
+  }
+
+  .calc .op {
+    color: var(--muted);
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .calc-val {
+    display: block;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    color: var(--blue-900);
+  }
+
+  .calc-val.total { color: var(--blue-700); }
+
+  .calc-label {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* ---------- Stats ---------- */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin: 16px 0 6px;
+  }
+
+  .stat {
+    padding: 14px;
+    border-radius: 14px;
+    background: var(--blue-50);
+    border: 1px solid var(--line);
+  }
+
+  .stat.main {
+    background: var(--brand);
+    border-color: var(--brand-dark);
+    color: var(--on-brand);
+  }
+
+  .stat-label {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .stat.main .stat-label { color: var(--on-brand-2); }
+
+  .stat-val {
+    display: block;
+    font-size: clamp(22px, 4.6vw, 30px);
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+    overflow-wrap: anywhere;
+  }
+
+  .my-bonus-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  .my-bonus-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    background: var(--blue-50);
+    font-size: 14px;
+  }
+
+  .my-bonus-list li.off { color: var(--muted); background: transparent; border: 1px solid var(--line); }
+
+  .tag {
+    font-size: 12px;
+    color: var(--muted);
+    display: block;
+  }
+
+  /* ---------- Leaderboard ---------- */
+  .board-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .rank-cell {
+    width: 56px;
+    font-weight: 700;
+    color: var(--blue-700);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .data-table tr.me td { background: var(--blue-100); }
+
+  .data-table .total-col { font-weight: 700; color: var(--blue-900); }
+
+  .you {
+    display: inline-block;
+    margin-left: 6px;
+    padding: 0 8px;
+    border-radius: 999px;
+    background: var(--brand);
+    color: var(--on-brand);
+    font-size: 12px;
+    font-weight: 600;
+    vertical-align: 1px;
+  }
+
+  .empty {
+    padding: 24px 12px;
+    text-align: center;
+    color: var(--muted);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 760px) {
+  }
+
+  @media (max-width: 560px) {
+    main { padding: 16px 12px 40px; }
+    .panel { padding: 18px 16px; border-radius: 16px; }
+    .bonus-grid { grid-template-columns: 1fr 1fr; }
+    .bonus-amount { font-size: 22px; }
+    .row-2 { grid-template-columns: 1fr; gap: 0; }
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stats .stat.main { grid-column: 1 / -1; }
+    .calc-val { font-size: 18px; }
+
+    /* Leaderboard and history become stacked rows on phones */
+    .stack thead { display: none; }
+    .stack, .stack tbody, .stack tr, .stack td { display: block; width: 100%; }
+    .stack tr {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .stack tr:last-child { border-bottom: 0; }
+    .stack tr.me { background: var(--blue-100); }
+    .stack tr.me td { background: transparent; }
+    .tabs { padding: 0 6px; }
+    .tabs button { padding: 10px 12px; }
+    .stack td {
+      border: 0 !important;
+      padding: 1px 0 !important;
+      text-align: left !important;
+    }
+    .stack td[data-label]::before {
+      content: attr(data-label) " ";
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .stack td.rank-cell { grid-row: span 4; width: auto; font-size: 18px; }
+    .stack td.name-cell { font-weight: 700; }
+    .stack.history tr { grid-template-columns: 1fr; }
+    .stack.history td.date-cell { font-weight: 700; color: var(--blue-900); }
+    .stack.history tr { position: relative; padding-right: 64px; }
+    .stack.history td.thumb-cell { position: absolute; top: 10px; right: 12px; width: auto; }
+    .thumb img { width: 52px; height: 52px; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .view { animation: show .18s ease-out; }
+    @keyframes show { from { opacity: 0; } to { opacity: 1; } }
+  }
+
+
+  /* Header illustration: sky with sun and clouds, then a park strip with people walking */
+  .top {
+    background: var(--brand) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='100' viewBox='0 0 300 100'%3E%3Ccircle cx='250' cy='44' r='26' fill='%23FFF6C9' opacity='.95'/%3E%3Cg fill='%23fff' opacity='.85'%3E%3Cg transform='translate(150 40)'%3E%3Cellipse rx='26' ry='10'/%3E%3Ccircle cx='-8' cy='-6' r='10'/%3E%3Ccircle cx='8' cy='-9' r='13'/%3E%3C/g%3E%3Cg transform='translate(70 70) scale(.7)'%3E%3Cellipse rx='26' ry='10'/%3E%3Ccircle cx='-8' cy='-6' r='10'/%3E%3Ccircle cx='8' cy='-9' r='13'/%3E%3C/g%3E%3Cg transform='translate(225 82) scale(.6)'%3E%3Cellipse rx='26' ry='10'/%3E%3Ccircle cx='-8' cy='-6' r='10'/%3E%3Ccircle cx='8' cy='-9' r='13'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") no-repeat right max(16px, calc(50% - 460px)) top 10px / 240px auto;
+  }
+  .park-strip {
+    height: 104px;
+    margin-top: -6px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='2400' height='132' viewBox='0 0 2400 132'%3E%3Cpath d='M0 40 C200 26 360 30 560 38 C760 46 900 22 1120 26 C1340 30 1460 44 1680 36 C1900 28 2100 20 2400 30 L2400 132 L0 132Z' fill='%23CDEFD8'/%3E%3Cg transform='translate(90 36)'%3E  %3Crect x='-2.5' y='-8.1' width='5' height='8.1' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-11.2' r='9.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.0' cy='-13.0' r='5.0' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(260 36)'%3E  %3Crect x='-2.5' y='-9.9' width='5' height='9.9' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-13.8' r='11.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-5.0' cy='-15.9' r='6.1' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(470 36)'%3E  %3Crect x='-2.5' y='-7.2' width='5' height='7.2' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-10.0' r='8.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-3.6' cy='-11.6' r='4.4' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(640 36)'%3E  %3Crect x='-2.5' y='-9.0' width='5' height='9.0' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-12.5' r='10.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.5' cy='-14.5' r='5.5' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(860 36)'%3E  %3Crect x='-2.5' y='-10.8' width='5' height='10.8' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-15.0' r='12.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-5.4' cy='-17.4' r='6.6' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1010 36)'%3E  %3Crect x='-2.5' y='-8.1' width='5' height='8.1' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-11.2' r='9.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.0' cy='-13.0' r='5.0' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1270 36)'%3E  %3Crect x='-2.5' y='-9.9' width='5' height='9.9' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-13.8' r='11.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-5.0' cy='-15.9' r='6.1' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1520 36)'%3E  %3Crect x='-2.5' y='-9.0' width='5' height='9.0' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-12.5' r='10.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.5' cy='-14.5' r='5.5' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1740 36)'%3E  %3Crect x='-2.5' y='-10.8' width='5' height='10.8' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-15.0' r='12.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-5.4' cy='-17.4' r='6.6' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1960 36)'%3E  %3Crect x='-2.5' y='-8.1' width='5' height='8.1' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-11.2' r='9.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.0' cy='-13.0' r='5.0' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(2180 36)'%3E  %3Crect x='-2.5' y='-9.9' width='5' height='9.9' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-13.8' r='11.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-5.0' cy='-15.9' r='6.1' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(2350 36)'%3E  %3Crect x='-2.5' y='-9.0' width='5' height='9.0' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-12.5' r='10.0' fill='%239ED8B0'/%3E  %3Ccircle cx='-4.5' cy='-14.5' r='5.5' fill='%23C5EBD1' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(560 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cg transform='translate(578 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cg transform='translate(1640 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cg transform='translate(1658 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cg transform='translate(2250 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cg transform='translate(2268 40)'%3E  %3Crect x='-2' y='-7.0' width='4' height='7.0' fill='%238C6A4F'/%3E  %3Cpath d='M0 -28 L9.0 -5.6 L-9.0 -5.6Z' fill='%238ED0A4'/%3E%3C/g%3E%3Cpath d='M0 74 C240 60 420 66 640 72 C860 78 1000 56 1240 58 C1480 60 1620 70 1860 66 C2080 62 2240 58 2400 62 L2400 132 L0 132Z' fill='%23AEE0BD'/%3E%3Cpath d='M140 109.6 L180 108.4 L220 107.3 L260 106.2 L300 105.1 L340 104.1 L380 103.0 L420 101.9 L460 100.7 L500 99.5 L540 98.2 L580 96.9 L620 95.5 L660 94.1 L700 92.6 L740 91.0 L780 89.4 L820 87.8 L860 86.1 L900 84.4 L940 82.7 L980 80.9 L1020 79.1 L1060 77.4 L1100 75.6 L1140 73.8 L1180 72.1 L1220 70.4 L1260 68.8 L1300 67.2 L1340 65.6 L1380 64.2 L1420 62.8 L1460 61.4 L1500 60.2 L1540 59.0 L1580 58.0 L1620 57.0 L1660 56.1 L1700 55.3 L1740 54.5 L1780 53.9 L1820 53.3 L1860 52.8 L1900 52.4 L1940 52.1 L1980 51.7 L2020 51.5 L2060 51.3 L2100 51.1 L2140 50.9 L2180 50.7 L2220 50.5 L2260 50.3 L2300 50.1 L2340 49.9 L2380 49.6 L2420 49.3 L2440 57.8 L2400 58.4 L2360 59.0 L2320 59.5 L2280 60.0 L2240 60.4 L2200 60.9 L2160 61.3 L2120 61.7 L2080 62.1 L2040 62.6 L2000 63.1 L1960 63.6 L1920 64.2 L1880 64.9 L1840 65.6 L1800 66.4 L1760 67.2 L1720 68.1 L1680 69.2 L1640 70.3 L1600 71.5 L1560 72.7 L1520 74.1 L1480 75.6 L1440 77.1 L1400 78.7 L1360 80.4 L1320 82.2 L1280 84.0 L1240 85.8 L1200 87.8 L1160 89.7 L1120 91.7 L1080 93.7 L1040 95.7 L1000 97.8 L960 99.8 L920 101.8 L880 103.8 L840 105.7 L800 107.6 L760 109.5 L720 111.3 L680 113.1 L640 114.8 L600 116.5 L560 118.1 L520 119.6 L480 121.1 L440 122.5 L400 123.9 L360 125.3 L320 126.6 L280 127.9 L240 129.2 L200 130.6 L160 132.0Z' fill='%23F6EEDB'/%3E%3Cpath d='M140 109.6 L180 108.4 L220 107.3 L260 106.2 L300 105.1 L340 104.1 L380 103.0 L420 101.9 L460 100.7 L500 99.5 L540 98.2 L580 96.9 L620 95.5 L660 94.1 L700 92.6 L740 91.0 L780 89.4 L820 87.8 L860 86.1 L900 84.4 L940 82.7 L980 80.9 L1020 79.1 L1060 77.4 L1100 75.6 L1140 73.8 L1180 72.1 L1220 70.4 L1260 68.8 L1300 67.2 L1340 65.6 L1380 64.2 L1420 62.8 L1460 61.4 L1500 60.2 L1540 59.0 L1580 58.0 L1620 57.0 L1660 56.1 L1700 55.3 L1740 54.5 L1780 53.9 L1820 53.3 L1860 52.8 L1900 52.4 L1940 52.1 L1980 51.7 L2020 51.5 L2060 51.3 L2100 51.1 L2140 50.9 L2180 50.7 L2220 50.5 L2260 50.3 L2300 50.1 L2340 49.9 L2380 49.6 L2420 49.3' fill='none' stroke='%23E3D6B8' stroke-width='1.4'/%3E%3Cg transform='translate(40 104)'%3E  %3Crect x='-2.5' y='-18.0' width='5' height='18.0' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-25.0' r='20.0' fill='%237CC79A'/%3E  %3Ccircle cx='-9.0' cy='-29.0' r='11.0' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(150 96)'%3E  %3Crect x='-2.5' y='-12.6' width='5' height='12.6' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-17.5' r='14.0' fill='%236DBF8E'/%3E  %3Ccircle cx='-6.3' cy='-20.3' r='7.7' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(720 80)'%3E  %3Crect x='-2.5' y='-11.7' width='5' height='11.7' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-16.2' r='13.0' fill='%2386CDA2'/%3E  %3Ccircle cx='-5.9' cy='-18.8' r='7.2' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1130 74)'%3E  %3Crect x='-2.5' y='-13.5' width='5' height='13.5' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-18.8' r='15.0' fill='%237CC79A'/%3E  %3Ccircle cx='-6.8' cy='-21.8' r='8.2' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1580 76)'%3E  %3Crect x='-2.5' y='-12.6' width='5' height='12.6' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-17.5' r='14.0' fill='%236DBF8E'/%3E  %3Ccircle cx='-6.3' cy='-20.3' r='7.7' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(2020 72)'%3E  %3Crect x='-2.5' y='-14.4' width='5' height='14.4' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-20.0' r='16.0' fill='%237CC79A'/%3E  %3Ccircle cx='-7.2' cy='-23.2' r='8.8' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(2330 70)'%3E  %3Crect x='-2.5' y='-16.2' width='5' height='16.2' rx='2' fill='%238C6A4F'/%3E  %3Ccircle cx='0' cy='-22.5' r='18.0' fill='%236DBF8E'/%3E  %3Ccircle cx='-8.1' cy='-26.1' r='9.9' fill='%23B6E6C6' opacity='.55'/%3E%3C/g%3E%3Cg transform='translate(1320 64.4)' fill='%238C6A4F'%3E%3Crect x='-15' y='-10' width='30' height='3' rx='1'/%3E%3Crect x='-15' y='-5' width='30' height='3' rx='1'/%3E%3Crect x='-13' y='-2' width='2.4' height='7'/%3E%3Crect x='10.6' y='-2' width='2.4' height='7'/%3E%3C/g%3E%3Cg transform='translate(1800 52.6)'%3E%3Crect x='-1.2' y='-34' width='2.4' height='34' fill='%233E5A72'/%3E%3Ccircle cx='0' cy='-36' r='3.6' fill='%23FFF6C9' stroke='%233E5A72' stroke-width='1.4'/%3E%3C/g%3E%3Cg transform='translate(820 86.8)'%3E%3Crect x='-1.2' y='-36' width='2.4' height='36' fill='%233E5A72'/%3E%3Ccircle cx='0' cy='-38' r='3.8' fill='%23FFF6C9' stroke='%233E5A72' stroke-width='1.4'/%3E%3C/g%3E%3Cg transform='translate(560 109.8017871277661) scale(0.82 0.82)'%3E  %3Cpath d='M0 -20 L6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%237A5AE0'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23C99A73'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(960 92.77800589482783) scale(0.75 0.75)'%3E  %3Cpath d='M0 -20 L8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%232F7DE1'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23F2C7A5'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(995 91.12350103785225) scale(0.75 0.75)'%3E  %3Cpath d='M0 -20 L6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%23E35D6A'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23C99A73'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(1200 81.51622314875615) scale(-0.71 0.71)'%3E  %3Cpath d='M0 -20 L6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%23F2A33A'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23C99A73'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(1430 71.96068125103841) scale(0.67 0.67)'%3E  %3Cpath d='M0 -20 L8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%2334A36B'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23F2C7A5'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(1680 64.4130091037255) scale(-0.63 0.63)'%3E  %3Cpath d='M0 -20 L8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%232F7DE1'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23F2C7A5'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(1985 59.50894598786172) scale(0.57 0.57)'%3E  %3Cpath d='M0 -20 L6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23C99A73' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%23E35D6A'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23C99A73'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Cg transform='translate(2015 59.216209522591825) scale(0.57 0.57)'%3E  %3Cpath d='M0 -20 L8 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M0 -20 L-6 0' stroke='%2322384F' stroke-width='4.2' stroke-linecap='round'/%3E  %3Cpath d='M-1 -34 L-7 -23' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Cpath d='M1 -34 L7 -25' stroke='%23F2C7A5' stroke-width='3.2' stroke-linecap='round'/%3E  %3Crect x='-5' y='-38' width='10' height='19' rx='4.5' fill='%237A5AE0'/%3E  %3Ccircle cx='0' cy='-43' r='5' fill='%23F2C7A5'/%3E  %3Cpath d='M-5 -44 a5 5 0 0 1 10 0 q-5 -3 -10 0z' fill='%233B2A22'/%3E%3C/g%3E%3Ccircle cx='110' cy='124' r='2.1' fill='%23F7A8B8'/%3E%3Ccircle cx='122' cy='128' r='2.1' fill='%23FFF'/%3E%3Ccircle cx='700' cy='118' r='2.1' fill='%23FFE07A'/%3E%3Ccircle cx='712' cy='122' r='2.1' fill='%23F7A8B8'/%3E%3Ccircle cx='1500' cy='104' r='2.1' fill='%23FFE07A'/%3E%3Ccircle cx='2200' cy='92' r='2.1' fill='%23F7A8B8'/%3E%3Ccircle cx='2212' cy='95' r='2.1' fill='%23FFF'/%3E%3C/svg%3E") no-repeat center bottom / cover;
+  }
+  .tabs-bar { background: #AEE0BD; }
+  .tabs-bar .tabs button { color: #24465F; }
+  .tabs-bar .tabs button[aria-selected="true"] { color: var(--blue-900); }
+  @media (max-width: 560px) {
+    .top { background-image: none; } /* sun and clouds would sit behind the title on a phone */
+    .park-strip { height: 84px; background-position: center bottom; }
+  }
+
+  /* ---------- Upload calendar ---------- */
+  .cal-month { margin-bottom: 16px; }
+  .cal-month:last-child { margin-bottom: 0; }
+  .cal-title { font-weight: 700; color: var(--blue-900); margin-bottom: 6px; }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 4px;
+  }
+  .cal-dow {
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding-bottom: 2px;
+  }
+  .cal-day {
+    min-height: 48px;
+    padding: 4px 2px;
+    border-radius: 10px;
+    border: 1px solid var(--line);
+    background: var(--white);
+    text-align: center;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  .cal-day .d { display: block; font-size: 14px; font-weight: 600; color: var(--blue-900); }
+  .cal-day .s { display: block; font-size: 11px; color: var(--muted); }
+  .cal-day.done { background: var(--brand); border-color: var(--brand-dark); }
+  .cal-day.done .s { color: var(--on-brand); font-weight: 600; }
+  .cal-day.missed { background: var(--blue-50); }
+  .cal-day.missed .s { color: var(--muted); }
+  .cal-day.today { box-shadow: inset 0 0 0 2px var(--blue-700); }
+  .cal-day.future, .cal-day.out { opacity: .4; }
+  .cal-blank { min-height: 48px; }
+  .cal-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .cal-legend i {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    margin-right: 5px;
+    vertical-align: -1px;
+    border: 1px solid var(--line);
+  }
+  .cal-legend .l-done { background: var(--brand); border-color: var(--brand-dark); }
+  .cal-legend .l-missed { background: var(--blue-50); }
+  .cal-legend .l-today { box-shadow: inset 0 0 0 2px var(--blue-700); background: var(--white); }
+
+  /* ---------- Header + icons ---------- */
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-mark {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: var(--white);
+    color: var(--blue-700);
+    display: grid;
+    place-items: center;
+    box-shadow: 0 2px 0 var(--brand-dark);
+  }
+  .top h1 {
+    letter-spacing: .04em;
+    font-weight: 700;
+    font-size: clamp(22px, 6.6vw, 40px);
+    white-space: nowrap;
+  }
+  .tabs button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .tabs .ic { flex: none; }
+  .h-ic {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .h-ic .ic {
+    flex: none;
+    color: var(--blue-700);
+  }
+  .btn .ic { margin-right: 2px; }
+  .submit-btn { font-size: 19px; letter-spacing: .04em; }
+  @media (max-width: 420px) {
+    .tabs button { padding: 10px 10px; font-size: 15px; gap: 4px; }
+    .tabs .ic { width: 16px; height: 16px; }
+    .brand-mark { width: 48px; height: 48px; border-radius: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <div class="brand">
+      <span class="brand-mark"><svg class="ic" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg></span>
+      <div>
+        <h1>STEP CHALLENGE</h1>
+        <p>บันทึกก้าวทุกวัน รับโบนัสตามกติกา แล้วดูอันดับของคุณ</p>
+      </div>
+    </div>
+  </div>
+  <div class="park-strip" aria-hidden="true"></div>
+  <div class="tabs-bar">
+  <nav class="tabs" role="tablist" aria-label="เมนู">
+    <button role="tab" data-view="join" data-when="out"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>ส่งก้าว</button>
+    <button role="tab" data-view="log" data-when="in"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>ส่งก้าว</button>
+    <button role="tab" data-view="me"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>ประวัติ</button>
+    <button role="tab" data-view="board"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>อันดับ</button>
+    <button role="tab" data-view="rules"><svg class="ic" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h8"/><path d="M8 11h6"/></svg>กติกา</button>
+  </nav>
+  </div>
+</header>
+
+<main>
+  <div class="demo-banner" id="demoBanner" hidden>
+    โหมดทดลอง: ข้อมูลและรูปถูกเก็บไว้ในเครื่องนี้เท่านั้น
+    <button class="link-btn" type="button" id="resetDemo">ล้างข้อมูลทดลอง</button>
+  </div>
+
+  <!-- ===== เข้าร่วม: ลงทะเบียน + ก้าวครั้งแรก ===== -->
+  <section class="view" id="view-join" hidden>
+    <div class="join-layout">
+      <div class="panel">
+        <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>ส่งก้าวของวันนี้</h2>
+        <p class="lead">เลือกชื่อและทีม แนบรูป ใส่จำนวนก้าว แล้วกด SUBMIT</p>
+
+        <div class="field">
+          <label for="regName">ชื่อผู้เข้าร่วม</label>
+          <div class="combo">
+            <input id="regName" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="regNameList" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="พิมพ์ชื่อ แล้วเลือกจากรายการ">
+            <ul class="combo-list" id="regNameList" role="listbox" hidden></ul>
+          </div>
+          <span class="hint" id="regNameHint">พิมพ์บางส่วนของชื่อหรือนามสกุล ระบบจะแสดงรายชื่อให้เลือก</span>
+        </div>
+
+        <div class="field">
+          <label for="regTeam">ทีม</label>
+          <select id="regTeam"><option value="">กำลังโหลดรายชื่อทีม…</option></select>
+        </div>
+
+        <div class="bonus-preview" id="prefillCard" aria-live="polite" hidden>
+          <strong id="prefillNum"></strong>
+          <span id="prefillText"></span>
+        </div>
+
+        <div class="section-break">
+          <h3 class="h-ic"><svg class="ic" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg>ก้าววันนี้</h3>
+          <p>แนบภาพหลักฐานและใส่จำนวนก้าว</p>
+        </div>
+
+          <div class="field" data-photo="reg">
+            <span class="label" id="regPhotoLabel">ภาพหลักฐานจำนวนก้าว (จำเป็น)</span>
+            <input id="regPhotoInput" class="photo-input visually-hidden" type="file" accept="image/*" aria-labelledby="regPhotoLabel">
+            <label class="photo-pick" for="regPhotoInput">
+              <span class="photo-empty">
+                <span class="photo-icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                </span>
+                <span class="photo-title" style="display:block;margin-top:8px">แตะเพื่อถ่ายรูปหรือเลือกรูป</span>
+                <span class="photo-sub" style="display:block">ภาพหน้าจอแอปนับก้าวที่เห็นวันที่และจำนวนก้าว ห้ามใช้รูปซ้ำ</span>
+              </span>
+              <img class="photo-preview" alt="ภาพหลักฐานที่เลือก" hidden>
+              <span class="photo-change" hidden>แตะเพื่อเปลี่ยนรูป</span>
+            </label>
+            <span class="size-badge" hidden></span>
+          </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="regDate">วันที่ของข้อมูล</label>
+            <input id="regDate" type="date">
+          </div>
+          <div class="field">
+            <label for="regSteps">จำนวนก้าวจริง</label>
+            <input id="regSteps" type="number" inputmode="numeric" min="1" max="100000" placeholder="เช่น 8500">
+          </div>
+        </div>
+
+          <div class="calc" aria-live="polite">
+            <div><span class="calc-val" id="regCalcSteps">0</span><span class="calc-label">ก้าวจริง</span></div>
+            <span class="op">+</span>
+            <div><span class="calc-val" id="regCalcBonus">–</span><span class="calc-label">โบนัสประจำวัน</span></div>
+            <span class="op">=</span>
+            <div><span class="calc-val total" id="regCalcTotal">–</span><span class="calc-label">ก้าวรวมวันนี้</span></div>
+          </div>
+
+        <p class="hint" style="margin:-4px 0 14px">โบนัสคำนวณจากข้อมูลในรายชื่อของผู้จัด ดู<a href="#rules" class="link-btn">กติกาโบนัส</a></p>
+
+        <button class="btn submit-btn" id="registerBtn" type="button">SUBMIT</button>
+        <div class="message" id="registerMsg" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== บันทึกก้าว ===== -->
+  <section class="view" id="view-log" hidden>
+    <div class="join-layout">
+      <div class="panel">
+        <div class="who">
+          <div>
+            <div class="who-name" id="whoName"></div>
+            <div class="who-sub" id="whoSub"></div>
+          </div>
+          <button class="btn secondary small" type="button" data-action="logout"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>เปลี่ยนชื่อ</button>
+        </div>
+
+        <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>ส่งก้าวของวันนี้</h2>
+        <p class="lead">ส่งวันเดิมซ้ำได้ ระบบจะแทนที่ข้อมูลเดิม ไม่นับก้าวหรือโบนัสซ้ำ</p>
+
+          <div class="field" data-photo="log">
+            <span class="label" id="logPhotoLabel">ภาพหลักฐานจำนวนก้าว (จำเป็น)</span>
+            <input id="logPhotoInput" class="photo-input visually-hidden" type="file" accept="image/*" aria-labelledby="logPhotoLabel">
+            <label class="photo-pick" for="logPhotoInput">
+              <span class="photo-empty">
+                <span class="photo-icon" aria-hidden="true">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+                </span>
+                <span class="photo-title" style="display:block;margin-top:8px">แตะเพื่อถ่ายรูปหรือเลือกรูป</span>
+                <span class="photo-sub" style="display:block">ภาพหน้าจอแอปนับก้าวที่เห็นวันที่และจำนวนก้าว ห้ามใช้รูปซ้ำ</span>
+              </span>
+              <img class="photo-preview" alt="ภาพหลักฐานที่เลือก" hidden>
+              <span class="photo-change" hidden>แตะเพื่อเปลี่ยนรูป</span>
+            </label>
+            <span class="size-badge" hidden></span>
+          </div>
+
+        <div class="row-2">
+          <div class="field">
+            <label for="logDate">วันที่ของข้อมูล</label>
+            <input id="logDate" type="date">
+          </div>
+          <div class="field">
+            <label for="logSteps">จำนวนก้าวจริง</label>
+            <input id="logSteps" type="number" inputmode="numeric" min="1" max="100000" placeholder="เช่น 8500">
+          </div>
+        </div>
+
+        <div class="message info" id="existingNote" hidden></div>
+
+        <div class="calc" aria-live="polite">
+          <div><span class="calc-val" id="calcSteps">0</span><span class="calc-label">ก้าวจริง</span></div>
+          <span class="op">+</span>
+          <div><span class="calc-val" id="calcBonus">0</span><span class="calc-label">โบนัสประจำวัน</span></div>
+          <span class="op">=</span>
+          <div><span class="calc-val total" id="calcTotal">0</span><span class="calc-label">ก้าวรวมวันนี้</span></div>
+        </div>
+
+        <button class="btn submit-btn" id="logBtn" type="button">SUBMIT</button>
+        <div class="message" id="logMsg" hidden></div>
+      </div>
+
+      <div class="panel">
+        <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 16v-4"/><path d="M12 16V8"/><path d="M17 16v-7"/></svg>ยอดสะสมของฉัน</h2>
+        <div class="stats" data-my-stats></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ประวัติของฉัน ===== -->
+  <section class="view" id="view-me" hidden>
+    <div class="panel" id="meEmpty" hidden>
+      <h2>ประวัติ</h2>
+      <div class="empty">เลือกชื่อของคุณในหน้าส่งก้าวก่อน แล้วจะเห็นว่าส่งก้าวไปวันไหนแล้วบ้าง<br>
+        <button class="link-btn" type="button" data-goto="join">ไปหน้าส่งก้าว</button></div>
+    </div>
+    <div id="meContent">
+    <div class="panel">
+      <div class="who">
+        <div>
+          <h2 id="meTitle"></h2>
+          <div class="who-sub" id="meTeamLine"></div>
+        </div>
+        <button class="btn secondary small" type="button" data-action="logout"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>เปลี่ยนชื่อ</button>
+      </div>
+      <div class="stats" data-my-stats></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>วันที่ส่งก้าวแล้ว</h2>
+      <p class="lead" id="calLead"></p>
+      <div id="calWrap"></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>ทีมของฉัน</h2>
+      <div id="myTeamWrap"><div class="empty">กำลังโหลดข้อมูล…</div></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>โบนัสของฉัน</h2>
+      <p class="lead" id="myBonusLead"></p>
+      <ul class="my-bonus-list" id="myBonusList"></ul>
+    </div>
+
+    <div class="panel">
+      <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>ประวัติการบันทึก</h2>
+      <p class="lead">เรียงจากวันล่าสุด</p>
+      <div id="historyWrap"></div>
+    </div>
+    </div>
+  </section>
+
+  <!-- ===== อันดับ ===== -->
+  <section class="view" id="view-board" hidden>
+    <div class="panel">
+      <div class="board-head">
+        <div>
+          <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>อันดับการแข่งขัน</h2>
+          <p class="lead" style="margin:0">เรียงตามก้าวรวมสะสม (ก้าวจริง + โบนัส)</p>
+        </div>
+        <button class="btn secondary small" type="button" id="refreshBoard"><svg class="ic" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></svg>รีเฟรช</button>
+      </div>
+      <div class="seg" role="group" aria-label="ประเภทอันดับ">
+        <button type="button" data-board="team" aria-pressed="true">ทีม</button>
+        <button type="button" data-board="person" aria-pressed="false">รายบุคคล</button>
+      </div>
+      <div id="boardWrap"><div class="empty">กำลังโหลดข้อมูล…</div></div>
+    </div>
+  </section>
+
+  <!-- ===== กติกา ===== -->
+  <section class="view" id="view-rules" hidden>
+    <div class="panel">
+      <h2 class="h-ic"><svg class="ic" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/><path d="M8 7h8"/><path d="M8 11h6"/></svg>กติกาโบนัส</h2>
+      <p class="lead">โบนัสสะสมได้ตามทุกเงื่อนไขที่เข้าเกณฑ์</p>
+      <div data-rules></div>
+    </div>
+  </section>
+</main>
+
+<dialog class="lightbox" id="lightbox">
+  <img id="lightboxImg" alt="ภาพหลักฐาน">
+  <button class="btn secondary small" type="button" id="lightboxClose">ปิด</button>
+</dialog>
+
+<script>
+/* =========================================================
+   ตั้งค่า
+   ========================================================= */
+
+// URL ของ Web App จาก Google Apps Script (Code.gs)
+// ถ้าเว้นว่าง หน้าเว็บจะทำงานในโหมดทดลอง (เก็บข้อมูลในเบราว์เซอร์นี้เท่านั้น)
+const API_URL = "https://script.google.com/macros/s/AKfycbwbT5jQx3UH2yvL3jSeXEvUlDRsxZ_eMejRnmsqODuVyUW_cAsbUF_w4Aubsb6EiUiB/exec";
+
+const BONUS_PER_CONDITION = 1000;
+const MAX_STEPS_PER_DAY = 100000;
+const TIMEZONE = "Asia/Bangkok";
+
+// วันเริ่มการแข่งขัน ใช้คำนวณอายุจากวันเกิด (ให้ตรงกับ CHALLENGE_START ใน Code.gs)
+// เว้นว่าง = คิดอายุ ณ วันที่ส่งก้าวครั้งแรก
+const CHALLENGE_START = "";
+
+// รูปที่ "คล้ายกันมาก" (ต่างกันไม่เกินค่านี้จาก 256) จะถูกทำเครื่องหมายในชีตให้ผู้จัดตรวจ แต่ไม่ถูกปฏิเสธ
+// (ภาพหน้าจอแอปเดียวกันคนละวันอาจคล้ายกันมาก ระบบจึงไม่ตัดสินเอง)
+const SIMILAR_THRESHOLD = 10;
+
+// บีบอัดรูป: ด้านยาวสุดไม่เกิน IMAGE_MAX_SIDE px และไฟล์เล็กกว่า IMAGE_TARGET_BYTES
+const IMAGE_MAX_SIDE = 720;
+const IMAGE_TARGET_BYTES = 40 * 1024;
+const MAX_ORIGINAL_FILE_SIZE = 20 * 1024 * 1024;
+
+// รายชื่อสำหรับโหมดทดลองเท่านั้น [ชื่อ, ทีม]
+// เมื่อใช้งานจริง รายชื่อและทีมจะดึงจากชีต "Roster" (คอลัมน์ A ชื่อ, คอลัมน์ B ทีม) ใน Google Sheet
+// รายชื่อสำหรับโหมดทดลองเท่านั้น [ชื่อ, ทีม, เพศ M/F, วันเกิด, ความเชื่อ]
+// เมื่อใช้งานจริง ข้อมูลทั้งหมดมาจากชีต "Roster" ใน Google Sheet
+const DEMO_ROSTER = [
+  ["สมชาย รักเดิน", "ทีม 1", "M", "1990-04-12", "Christian"],
+  ["มาลี ก้าวไว", "ทีม 1", "F", "1983-08-02", "Christian"],
+  ["ประเสริฐ ก้าวไกล", "ทีม 1", "M", "1969-01-20", "Non-Christian"],
+  ["ภูมิ ใจกล้า", "ทีม 2", "M", "2014-06-30", "Christian"],
+  ["วันดี มีสุข", "ทีม 2", "F", "1964-11-05", "Non-Christian"],
+  ["ฟ้าใส ใจดี", "ทีม 2", "F", "2011-03-05", "Non-Christian"],
+  ["ธนา เดินดี", "ทีม 3", "M", "1991-09-09", "Christian"],
+  ["กมล ศรีสุข", "ทีม 3", "F", "1995-02-14", "Christian"],
+  ["จิราพร บุญมา", "ทีม 3", "F", "1972-12-01", "Christian"],
+  ["ณัฐพล วงศ์ใหญ่", "ทีม 4", "M", "1988-05-17", "Non-Christian"],
+  ["ดารุณี แก้วงาม", "ทีม 4", "F", "1979-07-23", "Christian"],
+  ["ทศพล พรหมมา", "ทีม 4", "M", "1958-10-02", "Christian"],
+  ["นภัสสร ทองดี", "ทีม 5", "F", "2012-01-11", "Christian"],
+  ["ปิยะ สายสุวรรณ", "ทีม 5", "M", "1985-03-28", "Christian"],
+  ["พิมพ์ชนก ชัยมงคล", "ทีม 5", "F", "1998-09-15", "Non-Christian"],
+  ["รัตนา อินทร์แก้ว", "ทีม 6", "F", "1966-06-06", "Christian"],
+  ["วีระ ศักดิ์ดี", "ทีม 6", "M", "1993-12-19", "Non-Christian"],
+  ["ศิริพร จันทร์เพ็ญ", "ทีม 6", "F", "1990-02-02", "Christian"],
+  ["สุดารัตน์ มั่นคง", "ทีม 7", "F", "1975-04-04", "Non-Christian"],
+  ["อนุชา บุญเรือง", "ทีม 7", "M", "2010-08-08", "Christian"],
+  ["อรอุมา สุขใจ", "ทีม 7", "F", "1987-11-30", "Christian"],
+  ["John Smith", "ทีม 8", "M", "1980-01-01", "Christian"],
+  ["Sarah Lee", "ทีม 8", "F", "1992-05-05", "Christian"],
+  ["David Kim", "ทีม 8", "M", "1970-10-10", "Non-Christian"]
+];
+const DEMO_TEAMS = [...new Set(DEMO_ROSTER.map(r => r[1]))];
+
+/* =========================================================
+   กติกา
+   ========================================================= */
+
+const TITLES = {
+  MR:   { gender: "M", adult: true },
+  MS:   { gender: "F", adult: true },
+  MRS:  { gender: "F", adult: true },
+  BOY:  { gender: "M", adult: false },
+  GIRL: { gender: "F", adult: false }
+};
+
+const BONUS_RULES = [
+  { key: "female",       label: "เพศหญิง",           note: "MS, MRS และ GIRL" },
+  { key: "child",        label: "อายุต่ำกว่า 18 ปี",  note: "ทั้งหญิงและชาย" },
+  { key: "senior",       label: "อายุมากกว่า 50 ปี",  note: "ทั้งหญิงและชาย" },
+  { key: "nonChristian", label: "Non-Christian",     note: "ทุกเพศทุกวัย" }
+];
+
+const EXAMPLES = [
+  ["ผู้หญิงอายุ 30 ปี เป็น Christian", 1000],
+  ["เด็กผู้ชายอายุ 15 ปี เป็น Christian", 1000],
+  ["เด็กผู้หญิงอายุ 15 ปี เป็น Non-Christian", 3000],
+  ["ผู้ชายอายุ 55 ปี เป็น Non-Christian", 2000],
+  ["ผู้หญิงอายุ 55 ปี เป็น Non-Christian", 3000],
+  ["ผู้ชายอายุ 30 ปี เป็น Christian", 0]
+];
+
+const TH_MONTHS = ["มกราคม", "กุมภาพันธ์", "มีนาคม", "เมษายน", "พฤษภาคม", "มิถุนายน",
+                   "กรกฎาคม", "สิงหาคม", "กันยายน", "ตุลาคม", "พฤศจิกายน", "ธันวาคม"];
+
+function titleAgeError(title, age) {
+  if (!title || !Number.isFinite(age)) return "";
+  const t = TITLES[title];
+  if (!t) return "คำนำหน้าชื่อไม่ถูกต้อง";
+  if (t.adult && age < 18) return `${title} ใช้สำหรับผู้ที่อายุ 18 ปีขึ้นไป`;
+  if (!t.adult && age >= 18) return `${title} ใช้สำหรับผู้ที่อายุต่ำกว่า 18 ปี`;
+  return "";
+}
+
+function ageRefDate() { return CHALLENGE_START || todayISO(); }
+
+function ageAt(birthISO, refISO) {
+  const [by, bm, bd] = birthISO.split("-").map(Number);
+  const [ry, rm, rd] = refISO.split("-").map(Number);
+  let age = ry - by;
+  if (rm < bm || (rm === bm && rd < bd)) age--;
+  return age;
+}
+
+function validBirthdate(iso) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(iso)) return false;
+  const [y, m, d] = iso.split("-").map(Number);
+  const dt = new Date(Date.UTC(y, m - 1, d));
+  return dt.getUTCFullYear() === y && dt.getUTCMonth() === m - 1 && dt.getUTCDate() === d && iso <= todayISO();
+}
+
+function validateProfile({ title, age, belief }) {
+  if (!TITLES[title]) return "กรุณาเลือกคำนำหน้าชื่อ";
+  if (!Number.isInteger(age) || age < 1 || age > 120) return "กรุณาเลือกวันเกิดให้ถูกต้อง";
+  const err = titleAgeError(title, age);
+  if (err) return err;
+  if (belief !== "Christian" && belief !== "Non-Christian") return "กรุณาเลือกความเชื่อ";
+  return "";
+}
+
+function calcBonus({ title, age, belief }) {
+  const b = BONUS_PER_CONDITION;
+  return {
+    female:       TITLES[title] && TITLES[title].gender === "F" ? b : 0,
+    child:        age < 18 ? b : 0,   // อายุ 18 ปีพอดีไม่ได้
+    senior:       age > 50 ? b : 0,   // อายุ 50 ปีพอดีไม่ได้
+    nonChristian: belief === "Non-Christian" ? b : 0
+  };
+}
+
+function sumBonus(bonus) {
+  return BONUS_RULES.reduce((s, r) => s + (Number(bonus[r.key]) || 0), 0);
+}
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+
+const $ = id => document.getElementById(id);
+const fmt = n => Number(n || 0).toLocaleString("th-TH");
+
+function todayISO() {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: TIMEZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+}
+
+function thaiDate(iso) {
+  const [y, m, d] = iso.split("-").map(Number);
+  return new Date(y, m - 1, d).toLocaleDateString("th-TH", { day: "numeric", month: "short", year: "numeric" });
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;").replaceAll("'", "&#039;");
+}
+
+function showMsg(el, text, type) {
+  el.textContent = text;
+  el.className = `message ${type}`;
+  el.hidden = false;
+}
+
+function hideMsg(el) { el.hidden = true; el.textContent = ""; }
+
+function bonusLabels(bonus) {
+  return BONUS_RULES.filter(r => bonus[r.key] > 0).map(r => r.label);
+}
+
+function normName(s) { return String(s || "").trim().replace(/\s+/g, " ").toLowerCase(); }
+
+function summarize(entries) {
+  return entries.reduce((t, e) => ({
+    steps: t.steps + e.steps, bonus: t.bonus + e.bonusTotal, total: t.total + e.total, days: t.days + 1
+  }), { steps: 0, bonus: 0, total: 0, days: 0 });
+}
+
+function rankBy(list) {
+  list.sort((a, b) => b.total - a.total || b.steps - a.steps || a.name.localeCompare(b.name, "th"));
+  let rank = 0, prev = null;
+  list.forEach((r, i) => { if (prev === null || r.total !== prev) rank = i + 1; r.rank = rank; prev = r.total; });
+  return list;
+}
+
+function buildTeams(teamNames, people) {
+  return teamNames.map(name => {
+    const members = people.filter(x => x.team === name);
+    const sum = k => members.reduce((t, m) => t + (m[k] || 0), 0);
+    return {
+      name, count: members.length,
+      members: members.map(m => ({ id: m.id, name: m.name, steps: m.steps || 0, bonus: m.bonus || 0, total: m.total || 0 }))
+                      .sort((a, b) => b.total - a.total),
+      steps: sum("steps"), bonus: sum("bonus"), total: sum("total")
+    };
+  });
+}
+
+// Hamming distance between two hex strings of equal length
+function hexDistance(a, b) {
+  if (!a || !b || a.length !== b.length) return Infinity;
+  let d = 0;
+  for (let i = 0; i < a.length; i++) {
+    let x = parseInt(a[i], 16) ^ parseInt(b[i], 16);
+    while (x) { d += x & 1; x >>= 1; }
+  }
+  return d;
+}
+
+/* =========================================================
+   API (Google Apps Script หรือโหมดทดลอง)
+   ========================================================= */
+
+async function api(action, data = {}) {
+  const payload = { action, ...data };
+  if (!API_URL) return demoApi(payload);
+  let out;
+  try {
+    const res = await fetch(API_URL, { method: "POST", body: JSON.stringify(payload) });
+    out = await res.json();
+  } catch (err) {
+    throw new Error("เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ กรุณาตรวจสอบอินเทอร์เน็ตแล้วลองใหม่");
+  }
+  if (!out || !out.ok) {
+    const e = new Error((out && out.error) || "เกิดข้อผิดพลาด กรุณาลองใหม่");
+    e.code = out && out.code;
+    throw e;
+  }
+  return out;
+}
+
+/* ----- โหมดทดลอง: จำลอง backend ด้วย localStorage (ทำงานเหมือน Code.gs) ----- */
+
+const DEMO_KEY = "stepsChallengeDemoDb5";
+
+function demoLoad() {
+  try { return JSON.parse(localStorage.getItem(DEMO_KEY)) || { participants: [], entries: [] }; }
+  catch (_) { return { participants: [], entries: [] }; }
+}
+
+function demoSave(db) {
+  try { localStorage.setItem(DEMO_KEY, JSON.stringify(db)); }
+  catch (_) { demoFail("พื้นที่เก็บข้อมูลทดลองในเครื่องเต็ม กด “ล้างข้อมูลทดลอง” แล้วลองใหม่"); }
+}
+
+function demoFail(msg, code) { const e = new Error(msg); e.code = code; throw e; }
+
+function profileOut(p) {
+  return { id: p.id, title: p.title, name: p.name, age: p.age, belief: p.belief, team: p.team, bonus: calcBonus(p) };
+}
+
+async function sha256Hex(buf) {
+  const h = await crypto.subtle.digest("SHA-256", buf);
+  return [...new Uint8Array(h)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+
+function demoRosterProfile(row) {
+  if (!row || !row[2]) return null;
+  const [, , gender, birthdate, belief] = row;
+  if (!["M", "F"].includes(gender) || !validBirthdate(birthdate || "") || !["Christian", "Non-Christian"].includes(belief)) return null;
+  const age = ageAt(birthdate, ageRefDate());
+  const title = gender === "M" ? (age >= 18 ? "MR" : "BOY") : (age >= 18 ? "MS" : "GIRL");
+  return { title, birthdate, age, belief };
+}
+
+async function demoApi(p) {
+  await new Promise(r => setTimeout(r, 120));
+  const db = demoLoad();
+  const findP = name => db.participants.find(x => normName(x.name) === normName(name));
+
+  switch (p.action) {
+    case "options": {
+      return {
+        ok: true,
+        names: DEMO_ROSTER.map(([name, team]) => ({ name, team, registered: !!findP(name) })),
+        teams: DEMO_TEAMS
+      };
+    }
+    case "me": {
+      const me = findP(p.name);
+      if (!me) return { ok: true, registered: false };
+      const entries = db.entries.filter(e => e.participantId === me.id).sort((a, b) => b.date.localeCompare(a.date));
+      return { ok: true, registered: true, profile: profileOut(me), entries, totals: summarize(entries) };
+    }
+    case "lookup": {
+      const row = DEMO_ROSTER.find(r => normName(r[0]) === normName(p.name));
+      const rp = demoRosterProfile(row);
+      if (!rp) return { ok: true, prefilled: false, missing: ["เพศ (M/F)", "วันเกิด", "ความเชื่อ"] };
+      return { ok: true, prefilled: true, team: row[1], title: rp.title, dailyBonus: sumBonus(calcBonus(rp)) };
+    }
+    case "submit": {
+      const rosterRow = DEMO_ROSTER.find(r => normName(r[0]) === normName(p.name));
+      const rosterName = rosterRow && rosterRow[0];
+      if (!rosterName) demoFail("กรุณาเลือกชื่อจากรายชื่อผู้เข้าร่วม");
+      const date = String(p.date || "");
+      const steps = Number(p.steps);
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) demoFail("วันที่ไม่ถูกต้อง");
+      if (date > todayISO()) demoFail("ไม่สามารถส่งก้าวของวันในอนาคตได้");
+      if (!Number.isInteger(steps) || steps < 1 || steps > MAX_STEPS_PER_DAY) demoFail(`จำนวนก้าวต้องอยู่ระหว่าง 1–${fmt(MAX_STEPS_PER_DAY)}`);
+      if (!p.imageBase64) demoFail("กรุณาแนบภาพหลักฐานจำนวนก้าว");
+
+      let me = findP(rosterName);
+      let created = false;
+      if (!me) {
+        const rp = demoRosterProfile(rosterRow);
+        if (!rp) demoFail("ข้อมูลของชื่อนี้ในรายชื่อยังไม่ครบ กรุณาแจ้งผู้จัด");
+        const team = DEMO_TEAMS.includes(p.team) ? p.team : rosterRow[1];
+        if (!team) demoFail("กรุณาเลือกทีม");
+        me = { id: crypto.randomUUID(), name: rosterName, team, ...rp };
+        created = true;
+      }
+
+      // ---- ตรวจรูปซ้ำ ----
+      const bytes = Uint8Array.from(atob(p.imageBase64), c => c.charCodeAt(0));
+      const imageHash = await sha256Hex(bytes);
+      const others = db.entries.filter(e => !(e.participantId === me.id && e.date === date));
+      const nameOf = id => (db.participants.find(x => x.id === id) || me).name;
+      const exact = others.find(e => (p.fileHash && e.fileHash === p.fileHash) || e.imageHash === imageHash);
+      if (exact) demoFail(`รูปนี้เคยถูกส่งแล้ว (${nameOf(exact.participantId)} วันที่ ${thaiDate(exact.date)}) กรุณาแนบรูปของวันนี้`, "DUP");
+      let similar = null;
+      others.forEach(e => {
+        const d = hexDistance(p.pHash, e.pHash);
+        if (d <= SIMILAR_THRESHOLD && (!similar || d < similar.distance)) similar = { name: nameOf(e.participantId), date: e.date, distance: d };
+      });
+
+      if (created) db.participants.push(me);
+      const bonus = calcBonus(me);
+      const bonusTotal = sumBonus(bonus);
+      const entry = {
+        participantId: me.id, date, steps, bonus, bonusTotal, total: steps + bonusTotal,
+        evidenceThumb: "data:image/jpeg;base64," + p.imageBase64, evidenceUrl: "",
+        fileHash: p.fileHash || "", imageHash, pHash: p.pHash || "", similar,
+        updatedAt: new Date().toISOString()
+      };
+      const i = db.entries.findIndex(e => e.participantId === me.id && e.date === date);
+      const updated = i >= 0;
+      if (updated) db.entries[i] = entry; else db.entries.push(entry);
+      demoSave(db);
+      return { ok: true, created, updated, entry, profile: profileOut(me) };
+    }
+    case "leaderboard": {
+      const rows = db.participants.map(x => ({ id: x.id, name: x.name, team: x.team, ...summarize(db.entries.filter(e => e.participantId === x.id)) }));
+      const teams = rankBy(buildTeams(DEMO_TEAMS, rows).filter(t => t.count > 0));
+      return { ok: true, rows: rankBy(rows), teams };
+    }
+    default:
+      demoFail("คำสั่งไม่ถูกต้อง");
+  }
+}
+
+/* =========================================================
+   Session: the name this device is using (no PIN)
+   ========================================================= */
+
+const SESSION_KEY = "stepsChallengeUser";
+let session = null;   // { name, profile }
+let myData = null;    // { entries, totals }
+let roster = [];      // [{ name, team, registered }]
+
+function loadSession() {
+  try { session = JSON.parse(localStorage.getItem(SESSION_KEY)); } catch (_) { session = null; }
+}
+
+function saveSession() {
+  try {
+    if (session) localStorage.setItem(SESSION_KEY, JSON.stringify(session));
+    else localStorage.removeItem(SESSION_KEY);
+  } catch (_) {}
+}
+
+function signIn(name, profile) {
+  session = { name, profile };
+  saveSession();
+  updateTabs();
+}
+
+function logout() {
+  session = null;
+  myData = null;
+  saveSession();
+  updateTabs();
+  $("regName").value = "";
+  delete $("regName").dataset.picked;
+  showPicked(null);
+  go("join");
+}
+
+document.querySelectorAll('[data-action="logout"]').forEach(b => b.addEventListener("click", logout));
+
+/* =========================================================
+   Navigation
+   ========================================================= */
+
+const VIEWS = ["join", "log", "me", "board", "rules"];
+
+function updateTabs() {
+  document.querySelectorAll(".tabs button").forEach(b => {
+    const when = b.dataset.when;
+    b.hidden = (when === "in" && !session) || (when === "out" && !!session);
+  });
+}
+
+function go(view) {
+  if (!VIEWS.includes(view)) view = session ? "log" : "join";
+  if (view === "log" && !session) view = "join";
+  if (view === "join" && session) view = "log";
+  VIEWS.forEach(v => { $("view-" + v).hidden = v !== view; });
+  document.querySelectorAll(".tabs button").forEach(b => b.setAttribute("aria-selected", String(b.dataset.view === view)));
+  if (location.hash !== "#" + view) {
+    try { history.replaceState(null, "", "#" + view); } catch (_) { /* e.g. inside a preview frame */ }
+  }
+  if (view === "board") loadBoard();
+  if (view === "join") loadOptions();
+  if (view === "me") {
+    $("meEmpty").hidden = !!session;
+    $("meContent").hidden = !session;
+  }
+  if ((view === "log" || view === "me") && session) renderMine();
+  if (view === "me" && session) api("leaderboard").then(renderMyTeam).catch(() => {});
+}
+
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => go(b.dataset.view)));
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-goto]");
+  if (g) go(g.dataset.goto);
+});
+window.addEventListener("hashchange", () => go(location.hash.slice(1)));
+
+/* =========================================================
+   Rules
+   ========================================================= */
+
+function renderRules() {
+  const html = `
+    <div class="bonus-grid">
+      ${BONUS_RULES.map(r => `
+        <div class="bonus-item">
+          <span class="bonus-amount">+${fmt(BONUS_PER_CONDITION)} <small>ก้าว/วัน</small></span>
+          <span class="bonus-cond">${escapeHtml(r.label)}</span>
+          <span class="bonus-note">${escapeHtml(r.note)}</span>
+        </div>`).join("")}
+    </div>
+
+    <h3>เงื่อนไขสำคัญ</h3>
+    <ul class="rule-list">
+      <li>โบนัสสะสมได้ตามทุกเงื่อนไขที่เข้าเกณฑ์</li>
+      <li>แต่ละเงื่อนไขได้วันละ 1 ครั้ง เฉพาะวันที่มีการส่งก้าวเท่านั้น</li>
+      <li>ส่งวันเดิมซ้ำ ระบบจะแทนที่ข้อมูลเดิม โบนัสไม่เพิ่มตามจำนวนครั้ง</li>
+      <li>ทุกครั้งต้องแนบภาพหลักฐาน และห้ามใช้รูปซ้ำ ระบบจะไม่รับรูปที่เคยส่งแล้ว และรูปที่คล้ายรูปเดิมมากจะถูกส่งให้ผู้จัดตรวจสอบ</li>
+      <li>แข่งเป็นทีมตามรายชื่อทีมที่ผู้จัดกำหนด</li>
+      <li>อายุคำนวณจากวันเกิด ${CHALLENGE_START ? "ณ วันเริ่มการแข่งขัน" : "ณ วันที่ส่งก้าวครั้งแรก"} และใช้ตลอดการแข่งขัน</li>
+      <li>อายุ 18 ปีพอดีไม่ได้โบนัสเด็ก และอายุ 50 ปีพอดีไม่ได้โบนัสผู้สูงวัย</li>
+      <li>เพศ วันเกิด และความเชื่อมาจากรายชื่อของผู้จัด คำนำหน้าคิดให้เอง: ชายอายุ 18 ปีขึ้นไป = MR, ต่ำกว่า 18 ปี = BOY, หญิงอายุ 18 ปีขึ้นไป = MS, ต่ำกว่า 18 ปี = GIRL</li>
+    </ul>
+
+    <h3>สูตรคำนวณ</h3>
+    <div class="formula">
+      <p>ก้าวรวมประจำวัน = ก้าวจริงของวันนั้น + โบนัสทุกเงื่อนไขที่เข้าเกณฑ์</p>
+      <p>ก้าวสะสมตลอดการแข่งขัน = ผลรวมก้าวรวมประจำวันทั้งหมด</p>
+      <p>ก้าวรวมทีม = ผลรวมก้าวสะสมของสมาชิกทุกคนในทีม</p>
+    </div>
+
+    <h3>ตัวอย่าง</h3>
+    <div class="table-wrap">
+      <table class="example-table">
+        <thead><tr><th>ผู้เข้าร่วม</th><th class="num">โบนัสต่อวัน</th></tr></thead>
+        <tbody>
+          ${EXAMPLES.map(([who, b]) => `<tr><td>${who}</td><td class="num">${b ? fmt(b) + " ก้าว" : "ไม่มีโบนัส"}</td></tr>`).join("")}
+        </tbody>
+      </table>
+    </div>`;
+  document.querySelectorAll("[data-rules]").forEach(el => { el.innerHTML = html; });
+}
+
+/* =========================================================
+   Name search (type a few letters, pick from the list)
+   ========================================================= */
+
+function normSearch(s) { return String(s || "").toLowerCase().replace(/\s+/g, " ").trim(); }
+
+function highlight(name, q) {
+  const i = normSearch(name).indexOf(q);
+  if (!q || i < 0) return escapeHtml(name);
+  return escapeHtml(name.slice(0, i)) + "<mark>" + escapeHtml(name.slice(i, i + q.length)) + "</mark>" + escapeHtml(name.slice(i + q.length));
+}
+
+function setupCombo(input, list, getItems, onPick) {
+  let items = [];
+  let active = -1;
+
+  function close() {
+    list.hidden = true;
+    input.setAttribute("aria-expanded", "false");
+    input.removeAttribute("aria-activedescendant");
+    active = -1;
+  }
+
+  function render() {
+    const q = normSearch(input.value);
+    if (!q) { close(); return; }
+    items = getItems().filter(it => normSearch(it.name).includes(q))
+      .sort((a, b) => (normSearch(a.name).startsWith(q) ? 0 : 1) - (normSearch(b.name).startsWith(q) ? 0 : 1) || a.name.localeCompare(b.name, "th"))
+      .slice(0, 8);
+    active = items.length ? 0 : -1;
+    list.innerHTML = items.length
+      ? items.map((it, i) => `<li id="${list.id}-${i}" role="option" data-i="${i}" aria-selected="${i === active}">
+            <span>${highlight(it.name, q)}</span>${it.note ? `<span class="combo-note">${escapeHtml(it.note)}</span>` : ""}</li>`).join("")
+      : `<li class="combo-empty" aria-disabled="true">ไม่พบชื่อนี้ในรายชื่อ ลองพิมพ์ส่วนอื่นของชื่อ</li>`;
+    list.hidden = false;
+    input.setAttribute("aria-expanded", "true");
+    syncActive();
+  }
+
+  function syncActive() {
+    list.querySelectorAll("li[data-i]").forEach(li => li.setAttribute("aria-selected", String(Number(li.dataset.i) === active)));
+    if (active >= 0) {
+      input.setAttribute("aria-activedescendant", `${list.id}-${active}`);
+      const el = $(`${list.id}-${active}`);
+      if (el) el.scrollIntoView({ block: "nearest" });
+    }
+  }
+
+  function pick(i) {
+    const it = items[i];
+    if (!it) return;
+    input.value = it.name;
+    input.dataset.picked = it.name;
+    close();
+    onPick(it);
+  }
+
+  input.addEventListener("input", () => {
+    if (input.dataset.picked) { delete input.dataset.picked; onPick(null); }
+    render();
+  });
+  input.addEventListener("focus", () => { if (!input.dataset.picked) render(); });
+  input.addEventListener("blur", () => setTimeout(close, 120));
+  input.addEventListener("keydown", e => {
+    if (list.hidden || !items.length) return;
+    if (e.key === "ArrowDown") { e.preventDefault(); active = (active + 1) % items.length; syncActive(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); active = (active - 1 + items.length) % items.length; syncActive(); }
+    else if (e.key === "Enter") { e.preventDefault(); pick(active); }
+    else if (e.key === "Escape") { close(); }
+  });
+  list.addEventListener("pointerdown", e => {
+    const li = e.target.closest("li[data-i]");
+    if (!li) return;
+    e.preventDefault();
+    pick(Number(li.dataset.i));
+  });
+}
+
+
+
+/* =========================================================
+   Send steps (first time): name only, everything else comes from the Roster
+   ========================================================= */
+
+let teamNames = [];
+
+async function loadOptions() {
+  try {
+    const out = await api("options");
+    roster = out.names || [];
+    teamNames = out.teams || [];
+    renderTeamSelect();
+  } catch (e) {
+    $("regTeam").innerHTML = `<option value="">โหลดรายชื่อทีมไม่สำเร็จ</option>`;
+    showMsg($("registerMsg"), "โหลดรายชื่อไม่สำเร็จ: " + e.message, "error");
+  }
+}
+
+function renderTeamSelect(preselect) {
+  const sel = $("regTeam");
+  const keep = preselect || sel.value;
+  sel.innerHTML = teamNames.length
+    ? `<option value="">เลือกทีม</option>` + teamNames.map(t => `<option value="${escapeHtml(t)}" ${t === keep ? "selected" : ""}>${escapeHtml(t)}</option>`).join("")
+    : `<option value="">ยังไม่มีรายชื่อทีม</option>`;
+}
+
+// ข้อมูลของชื่อที่เลือกจากรายชื่อ: { title, team, dailyBonus } | null
+let picked = null;
+
+function showPicked(info) {
+  picked = info && info.prefilled ? info : null;
+  const card = $("prefillCard");
+  card.hidden = !picked;
+  if (picked) {
+    $("prefillNum").textContent = picked.dailyBonus ? `+${fmt(picked.dailyBonus)} ก้าว/วัน` : "ไม่มีโบนัส";
+    $("prefillText").textContent = `${picked.title} ${picked.name} · โบนัสคำนวณจากข้อมูลในรายชื่อ`;
+  }
+  updateRegCalc();
+}
+
+// พิมพ์ชื่อ: เคยส่งแล้ว = ไปหน้าส่งก้าวต่อเลย, ยังไม่เคยส่ง = ดึงข้อมูลจากรายชื่อมาแสดง
+setupCombo($("regName"), $("regNameList"),
+  () => roster.map(r => ({ name: r.name, team: r.team, registered: r.registered, note: r.registered ? "เคยส่งแล้ว" : (r.team || "") })),
+  async it => {
+    const hint = $("regNameHint");
+    if (!it) {
+      hint.className = "hint";
+      hint.textContent = "พิมพ์บางส่วนของชื่อหรือนามสกุล ระบบจะแสดงรายชื่อให้เลือก";
+      showPicked(null);
+      return;
+    }
+    if (it.registered) {
+      hint.className = "hint";
+      hint.textContent = "ชื่อนี้เคยส่งก้าวแล้ว กำลังเปิดหน้าส่งก้าว…";
+      try {
+        const out = await api("me", { name: it.name });
+        if (!out.registered) throw new Error("ไม่พบข้อมูล");
+        signIn(it.name, out.profile);
+        myData = { entries: out.entries || [], totals: out.totals || summarize([]) };
+        go("log");
+        showMsg($("logMsg"), `ยินดีต้อนรับกลับ ${out.profile.name} แนบรูป ใส่จำนวนก้าว แล้วกด SUBMIT`, "info");
+      } catch (e) {
+        hint.className = "field-error";
+        hint.textContent = "เปิดข้อมูลไม่สำเร็จ: " + e.message;
+      }
+      return;
+    }
+    hint.className = "hint";
+    hint.textContent = "กำลังโหลดข้อมูล…";
+    try {
+      const info = await api("lookup", { name: it.name });
+      if ($("regName").dataset.picked !== it.name) return;
+      if (info.prefilled) {
+        hint.className = "picked-ok";
+        hint.textContent = "✓ เลือกชื่อแล้ว";
+        if (info.team || it.team) renderTeamSelect(info.team || it.team); // ทีมตามรายชื่อ (เปลี่ยนได้)
+        showPicked({ ...info, name: it.name });
+      } else {
+        hint.className = "field-error";
+        hint.textContent = `ข้อมูลของชื่อนี้ในรายชื่อยังไม่ครบ${info.missing && info.missing.length ? ` (${info.missing.join(", ")})` : ""} กรุณาแจ้งผู้จัด`;
+        showPicked(null);
+      }
+    } catch (e) {
+      hint.className = "field-error";
+      hint.textContent = "โหลดข้อมูลไม่สำเร็จ: " + e.message;
+      showPicked(null);
+    }
+  });
+
+function updateRegCalc() {
+  const steps = Math.max(0, Math.floor(Number($("regSteps").value) || 0));
+  $("regCalcSteps").textContent = fmt(steps);
+  if (!picked) {
+    $("regCalcBonus").textContent = "–";
+    $("regCalcTotal").textContent = "–";
+    return;
+  }
+  const bonus = steps > 0 ? picked.dailyBonus : 0;
+  $("regCalcBonus").textContent = fmt(bonus);
+  $("regCalcTotal").textContent = fmt(steps + bonus);
+}
+
+$("regSteps").addEventListener("input", updateRegCalc);
+
+function validateStepInput(date, steps) {
+  if (!date) return "กรุณาเลือกวันที่ของข้อมูล";
+  if (date > todayISO()) return "ไม่สามารถบันทึกก้าวของวันในอนาคตได้";
+  if (!Number.isInteger(steps) || steps < 1 || steps > MAX_STEPS_PER_DAY) return `กรุณากรอกจำนวนก้าวเป็นจำนวนเต็ม 1–${fmt(MAX_STEPS_PER_DAY)}`;
+  return "";
+}
+
+async function sendSteps(name, date, steps, photo, team) {
+  return api("submit", {
+    name, team, date, steps,
+    imageBase64: await blobToBase64(photo.blob),
+    fileHash: photo.fileHash, pHash: photo.pHash,
+    fileName: `${date}-${name}.jpg`
+  });
+}
+
+function savedText(out, date) {
+  const e = out.entry;
+  return `${out.updated ? "แก้ไข" : "บันทึก"}ข้อมูลวันที่ ${thaiDate(date)} แล้ว: ก้าวจริง ${fmt(e.steps)} + โบนัส ${fmt(e.bonusTotal)} = ${fmt(e.total)} ก้าว`;
+}
+
+$("registerBtn").addEventListener("click", async () => {
+  const msg = $("registerMsg");
+  hideMsg(msg);
+  const name = $("regName").dataset.picked || "";
+  if (!name) return showMsg(msg, $("regName").value.trim() ? "กรุณาแตะเลือกชื่อจากรายการที่ขึ้นมา" : "กรุณาพิมพ์และเลือกชื่อผู้เข้าร่วม", "error");
+  if (!picked) return showMsg(msg, "ข้อมูลของชื่อนี้ในรายชื่อยังไม่ครบ กรุณาแจ้งผู้จัด", "error");
+  const team = $("regTeam").value;
+  if (!team) return showMsg(msg, "กรุณาเลือกทีม", "error");
+  if (!regPhoto.photo) { regPhoto.flagMissing(); return showMsg(msg, "กรุณาแนบภาพหลักฐานจำนวนก้าว", "error"); }
+  const date = $("regDate").value;
+  const steps = Number($("regSteps").value);
+  const stepErr = validateStepInput(date, steps);
+  if (stepErr) return showMsg(msg, stepErr, "error");
+
+  const btn = $("registerBtn");
+  btn.disabled = true;
+  btn.textContent = "กำลังส่ง…";
+  try {
+    const out = await sendSteps(name, date, steps, regPhoto.photo, team);
+    signIn(name, out.profile);
+    regPhoto.reset();
+    $("regSteps").value = "";
+    await refreshMine();
+    go("log");
+    showMsg($("logMsg"), `ส่งก้าวครั้งแรกเรียบร้อย ${savedText(out, date)}`, "success");
+  } catch (e) {
+    showMsg(msg, e.message, "error");
+    if (e.code === "DUP") regPhoto.flagMissing();
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "SUBMIT";
+  }
+});
+
+/* =========================================================
+   Log steps (day 2 onwards)
+   ========================================================= */
+
+function myDailyBonus() {
+  return session ? sumBonus(session.profile.bonus || calcBonus(session.profile)) : 0;
+}
+
+function updateCalc() {
+  const steps = Math.max(0, Math.floor(Number($("logSteps").value) || 0));
+  const bonus = steps > 0 ? myDailyBonus() : 0;
+  $("calcSteps").textContent = fmt(steps);
+  $("calcBonus").textContent = fmt(bonus);
+  $("calcTotal").textContent = fmt(steps + bonus);
+  const note = $("existingNote");
+  const existing = myData && myData.entries.find(e => e.date === $("logDate").value);
+  note.hidden = !existing;
+  if (existing) note.textContent = `วันที่ ${thaiDate(existing.date)} บันทึกไว้แล้ว (${fmt(existing.steps)} ก้าว) การส่งครั้งนี้จะแทนที่ข้อมูลเดิม`;
+}
+
+$("logSteps").addEventListener("input", updateCalc);
+$("logDate").addEventListener("change", updateCalc);
+
+$("logBtn").addEventListener("click", async () => {
+  const msg = $("logMsg");
+  hideMsg(msg);
+  if (!logPhoto.photo) { logPhoto.flagMissing(); return showMsg(msg, "กรุณาแนบภาพหลักฐานจำนวนก้าวก่อนส่ง", "error"); }
+  const date = $("logDate").value;
+  const steps = Number($("logSteps").value);
+  const stepErr = validateStepInput(date, steps);
+  if (stepErr) return showMsg(msg, stepErr, "error");
+
+  const btn = $("logBtn");
+  btn.disabled = true;
+  btn.textContent = "กำลังส่ง…";
+  try {
+    const out = await sendSteps(session.name, date, steps, logPhoto.photo);
+    showMsg(msg, savedText(out, date), "success");
+    $("logSteps").value = "";
+    $("logDate").value = todayISO();
+    logPhoto.reset();
+    await refreshMine();
+  } catch (e) {
+    showMsg(msg, e.message, "error");
+    if (e.code === "DUP") logPhoto.flagMissing();
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "SUBMIT";
+  }
+});
+
+/* =========================================================
+   My data
+   ========================================================= */
+
+async function refreshMine() {
+  if (!session) return;
+  try {
+    const out = await api("me", { name: session.name });
+    if (!out.registered) { logout(); return; }
+    session.profile = out.profile;
+    saveSession();
+    myData = { entries: out.entries || [], totals: out.totals || summarize([]) };
+    renderMine();
+  } catch (_) { /* keep what we have */ }
+}
+
+function renderMine() {
+  if (!session) return;
+  const p = session.profile;
+  const bonus = p.bonus || calcBonus(p);
+  const daily = sumBonus(bonus);
+  const labels = bonusLabels(bonus);
+
+  $("whoName").textContent = `${p.title} ${p.name}`;
+  $("whoSub").textContent = `${p.team} · ${daily ? `โบนัส +${fmt(daily)} ก้าวในทุกวันที่บันทึก` : "ไม่มีโบนัสประจำวัน"}`;
+  $("meTitle").textContent = `${p.title} ${p.name}`;
+  $("meTeamLine").textContent = p.team;
+
+  const t = (myData && myData.totals) || summarize([]);
+  const statsHtml = `
+    <div class="stat main"><span class="stat-label">ก้าวรวมสะสม</span><span class="stat-val">${fmt(t.total)}</span></div>
+    <div class="stat"><span class="stat-label">ก้าวจริงสะสม</span><span class="stat-val">${fmt(t.steps)}</span></div>
+    <div class="stat"><span class="stat-label">โบนัสสะสม</span><span class="stat-val">${fmt(t.bonus)}</span></div>`;
+  document.querySelectorAll("[data-my-stats]").forEach(el => { el.innerHTML = statsHtml; });
+
+  $("myBonusLead").textContent = daily
+    ? `ได้โบนัส ${fmt(daily)} ก้าวในทุกวันที่มีการบันทึกก้าว (${labels.join(", ")})`
+    : "ไม่เข้าเงื่อนไขโบนัส ก้าวรวมจึงเท่ากับก้าวจริง";
+  $("myBonusList").innerHTML = BONUS_RULES.map(r => `
+    <li class="${bonus[r.key] ? "" : "off"}">
+      <span>${escapeHtml(r.label)}</span>
+      <strong>${bonus[r.key] ? "+" + fmt(bonus[r.key]) : "ไม่เข้าเงื่อนไข"}</strong>
+    </li>`).join("");
+
+  const entries = (myData && myData.entries) || [];
+  renderCalendar(entries);
+  if (!entries.length) {
+    $("historyWrap").innerHTML = `<div class="empty">ยังไม่มีการบันทึกก้าว</div>`;
+  } else {
+    const asc = [...entries].sort((a, b) => a.date.localeCompare(b.date));
+    let run = 0;
+    const cum = {};
+    asc.forEach(e => { run += e.total; cum[e.date] = run; });
+    $("historyWrap").innerHTML = `
+      <div class="table-wrap">
+        <table class="data-table stack history">
+          <thead><tr>
+            <th>วันที่</th><th>หลักฐาน</th><th class="num">ก้าวจริง</th><th class="num">โบนัสประจำวัน</th>
+            <th class="num">ก้าวรวมประจำวัน</th><th class="num">สะสม</th>
+          </tr></thead>
+          <tbody>
+            ${entries.map((e, i) => {
+              const bl = bonusLabels(e.bonus || {});
+              return `<tr>
+                <td class="date-cell">${thaiDate(e.date)}</td>
+                <td class="thumb-cell">${e.evidenceThumb
+                  ? `<button class="thumb" type="button" data-entry="${i}" aria-label="ดูภาพหลักฐานวันที่ ${thaiDate(e.date)}"><img src="${escapeHtml(e.evidenceThumb)}" alt=""></button>`
+                  : (e.evidenceUrl ? `<a href="${escapeHtml(e.evidenceUrl)}" target="_blank" rel="noopener">ดูรูป</a>` : "–")}</td>
+                <td class="num" data-label="ก้าวจริง">${fmt(e.steps)}</td>
+                <td class="num" data-label="โบนัส">${fmt(e.bonusTotal)}${bl.length ? `<span class="tag">${escapeHtml(bl.join(", "))}</span>` : ""}</td>
+                <td class="num total-col" data-label="รวมประจำวัน">${fmt(e.total)}</td>
+                <td class="num" data-label="สะสม">${fmt(cum[e.date])}</td>
+              </tr>`;
+            }).join("")}
+          </tbody>
+        </table>
+      </div>`;
+  }
+  updateCalc();
+}
+
+// ปฏิทินบอกว่าส่งก้าววันไหนแล้วบ้าง
+function renderCalendar(entries) {
+  const byDate = {};
+  entries.forEach(e => { byDate[e.date] = e; });
+  const today = todayISO();
+  const dates = Object.keys(byDate).sort();
+  const start = CHALLENGE_START && (!dates.length || CHALLENGE_START < dates[0]) ? CHALLENGE_START : (dates[0] || today);
+  const firstDay = CHALLENGE_START || dates[0] || today;
+
+  // count days from the first day until today that have no upload
+  let missed = 0;
+  for (let d = new Date(firstDay + "T00:00:00Z"); d.toISOString().slice(0, 10) <= today; d.setUTCDate(d.getUTCDate() + 1)) {
+    if (!byDate[d.toISOString().slice(0, 10)]) missed++;
+  }
+  $("calLead").textContent = dates.length
+    ? `ส่งแล้ว ${dates.length} วัน${missed ? ` · ยังไม่ได้ส่ง ${missed} วัน` : " · ส่งครบทุกวัน"}`
+    : "ยังไม่ได้ส่งก้าว";
+
+  const DOW = ["อา", "จ", "อ", "พ", "พฤ", "ศ", "ส"];
+  const [sy, sm] = start.split("-").map(Number);
+  const [ty, tm] = today.split("-").map(Number);
+  let html = "";
+  for (let y = sy, m = sm; y < ty || (y === ty && m <= tm); m === 12 ? (y++, m = 1) : m++) {
+    const days = new Date(Date.UTC(y, m, 0)).getUTCDate();
+    const lead = new Date(Date.UTC(y, m - 1, 1)).getUTCDay();
+    let cells = DOW.map(d => `<div class="cal-dow">${d}</div>`).join("");
+    cells += Array.from({ length: lead }, () => `<div class="cal-blank"></div>`).join("");
+    for (let d = 1; d <= days; d++) {
+      const iso = `${y}-${String(m).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
+      const e = byDate[iso];
+      const cls = ["cal-day"];
+      let sub = "";
+      if (e) { cls.push("done"); sub = e.steps >= 1000 ? (e.steps / 1000).toFixed(1).replace(/\.0$/, "") + "k" : String(e.steps); }
+      else if (iso > today) cls.push("future");
+      else if (iso < firstDay) cls.push("out");
+      else { cls.push("missed"); sub = "–"; }
+      if (iso === today) cls.push("today");
+      const label = e ? `${thaiDate(iso)} ส่งแล้ว ${fmt(e.steps)} ก้าว` : thaiDate(iso);
+      cells += `<div class="${cls.join(" ")}" title="${label}" aria-label="${label}"><span class="d">${d}</span><span class="s">${sub}</span></div>`;
+    }
+    html += `<div class="cal-month"><div class="cal-title">${TH_MONTHS[m - 1]} ${y + 543}</div><div class="cal-grid">${cells}</div></div>`;
+  }
+  $("calWrap").innerHTML = html + `
+    <div class="cal-legend">
+      <span><i class="l-done"></i>ส่งแล้ว (ตัวเลข = ก้าวจริง)</span>
+      <span><i class="l-missed"></i>ยังไม่ได้ส่ง</span>
+      <span><i class="l-today"></i>วันนี้</span>
+    </div>`;
+}
+
+function renderMyTeam(board) {
+  const wrap = $("myTeamWrap");
+  if (!session) return;
+  const team = board && (board.teams || []).find(t => t.name === session.profile.team);
+  if (!team) { wrap.innerHTML = `<div class="empty">ยังไม่มีข้อมูลทีม</div>`; return; }
+  wrap.innerHTML = `
+    <div class="team-card">
+      <div class="tc-name">${escapeHtml(team.name)}</div>
+      <div class="tc-sub">อันดับ ${team.rank} จาก ${(board.teams || []).length} ทีม · สมาชิกที่ส่งแล้ว ${team.count} คน</div>
+      <span class="tc-total">${fmt(team.total)} <small style="font-size:14px;font-weight:500">ก้าวรวมทีม</small></span>
+    </div>
+    <ul class="my-bonus-list">
+      ${team.members.map(m => `<li><span>${escapeHtml(m.name)}${m.name === session.name ? ' <span class="you">คุณ</span>' : ""}</span><strong>${fmt(m.total)}</strong></li>`).join("")}
+    </ul>`;
+}
+
+/* =========================================================
+   Photo picker: compress + fingerprints for duplicate check
+   ========================================================= */
+
+function loadImageFromBlob(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("cannot read image"));
+      img.src = r.result;
+    };
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+
+function drawJpeg(img, maxSide, quality) {
+  return new Promise((resolve, reject) => {
+    const scale = Math.min(1, maxSide / Math.max(img.naturalWidth, img.naturalHeight));
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.max(1, Math.round(img.naturalWidth * scale));
+    canvas.height = Math.max(1, Math.round(img.naturalHeight * scale));
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    canvas.toBlob(b => b ? resolve(b) : reject(new Error("compress failed")), "image/jpeg", quality);
+  });
+}
+
+async function compressImage(img) {
+  let side = IMAGE_MAX_SIDE, quality = 0.6;
+  let blob = await drawJpeg(img, side, quality);
+  for (let i = 0; i < 12 && blob.size > IMAGE_TARGET_BYTES; i++) {
+    if (quality > 0.35) quality = Math.round((quality - 0.1) * 100) / 100;
+    else side = Math.max(240, Math.round(side * 0.8));
+    blob = await drawJpeg(img, side, quality);
+  }
+  return blob;
+}
+
+// 256-bit difference hash: survives resizing and recompression, so re-saved copies are caught
+function perceptualHash(img) {
+  // Shrink in two steps (canvas, then exact block averages) so tiny details and
+  // compression noise wash out, then compare neighbouring cells.
+  const w = 17, h = 16, k = 12;
+  const c = document.createElement("canvas");
+  c.width = w * k; c.height = h * k;
+  const ctx = c.getContext("2d");
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
+  // halve repeatedly first: one big downscale in a browser skips most pixels
+  let src = img, sw = img.naturalWidth, sh = img.naturalHeight;
+  while (sw / 2 > c.width && sh / 2 > c.height) {
+    const t = document.createElement("canvas");
+    t.width = Math.round(sw / 2); t.height = Math.round(sh / 2);
+    const tc = t.getContext("2d");
+    tc.imageSmoothingQuality = "high";
+    tc.drawImage(src, 0, 0, t.width, t.height);
+    src = t; sw = t.width; sh = t.height;
+  }
+  ctx.drawImage(src, 0, 0, c.width, c.height);
+  const px = ctx.getImageData(0, 0, c.width, c.height).data;
+  const cell = [];
+  for (let cy = 0; cy < h; cy++) for (let cx = 0; cx < w; cx++) {
+    let sum = 0;
+    for (let y = cy * k; y < (cy + 1) * k; y++) for (let x = cx * k; x < (cx + 1) * k; x++) {
+      const i = (y * c.width + x) * 4;
+      sum += px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
+    }
+    cell.push(sum / (k * k));
+  }
+  let bits = "";
+  for (let y = 0; y < h; y++) for (let x = 0; x < w - 1; x++) bits += cell[y * w + x] > cell[y * w + x + 1] ? "1" : "0";
+  let hex = "";
+  for (let i = 0; i < bits.length; i += 4) hex += parseInt(bits.slice(i, i + 4), 2).toString(16);
+  return hex;
+}
+
+function blobToDataUrl(blob) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result));
+    r.onerror = reject;
+    r.readAsDataURL(blob);
+  });
+}
+
+function blobToBase64(blob) {
+  return blobToDataUrl(blob).then(s => s.split(",")[1]);
+}
+
+function formatFileSize(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
+}
+
+function createPhotoPicker(root, msgEl) {
+  const input = root.querySelector(".photo-input");
+  const pick = root.querySelector(".photo-pick");
+  const empty = root.querySelector(".photo-empty");
+  const img = root.querySelector(".photo-preview");
+  const change = root.querySelector(".photo-change");
+  const info = root.querySelector(".size-badge");
+  let photo = null; // { blob, fileHash, pHash }
+
+  function reset() {
+    photo = null;
+    input.value = "";
+    img.hidden = true;
+    img.removeAttribute("src");
+    empty.hidden = false;
+    change.hidden = true;
+    info.hidden = true;
+    pick.classList.remove("has-photo", "invalid");
+  }
+
+  input.addEventListener("change", async () => {
+    hideMsg(msgEl);
+    const file = input.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) { reset(); return showMsg(msgEl, "กรุณาเลือกไฟล์รูปภาพเท่านั้น", "error"); }
+    if (file.size > MAX_ORIGINAL_FILE_SIZE) { reset(); return showMsg(msgEl, "ไฟล์ต้นฉบับต้องมีขนาดไม่เกิน 20 MB", "error"); }
+    info.hidden = false;
+    info.textContent = "กำลังย่อรูป…";
+    try {
+      const original = await loadImageFromBlob(file);
+      const blob = await compressImage(original);
+      let fileHash = "";
+      try { fileHash = await sha256Hex(await file.arrayBuffer()); } catch (_) {}
+      photo = { blob, fileHash, pHash: perceptualHash(original) };
+      img.src = await blobToDataUrl(blob);
+      img.hidden = false;
+      empty.hidden = true;
+      change.hidden = false;
+      pick.classList.add("has-photo");
+      pick.classList.remove("invalid");
+      info.textContent = `ย่อรูปแล้ว ${formatFileSize(file.size)} → ${formatFileSize(blob.size)}`;
+    } catch (e) {
+      reset();
+      showMsg(msgEl, "ไม่สามารถอ่านรูปภาพนี้ได้ กรุณาเลือกรูปอื่น", "error");
+    }
+  });
+
+  return {
+    get photo() { return photo; },
+    reset,
+    flagMissing() {
+      pick.classList.add("invalid");
+      pick.scrollIntoView({ behavior: "smooth", block: "center" });
+    },
+    async copyFrom(other) {
+      const o = other.photo;
+      if (!o) return;
+      photo = { ...o };
+      img.src = await blobToDataUrl(o.blob);
+      img.hidden = false;
+      empty.hidden = true;
+      change.hidden = false;
+      pick.classList.add("has-photo");
+      info.hidden = false;
+      info.textContent = "ใช้รูปเดิม";
+    }
+  };
+}
+
+const regPhoto = createPhotoPicker(document.querySelector('[data-photo="reg"]'), $("registerMsg"));
+const logPhoto = createPhotoPicker(document.querySelector('[data-photo="log"]'), $("logMsg"));
+
+/* =========================================================
+   Leaderboard
+   ========================================================= */
+
+let boardLoading = false;
+let boardMode = "team";
+let boardData = null;
+
+document.querySelectorAll("[data-board]").forEach(b => b.addEventListener("click", () => {
+  boardMode = b.dataset.board;
+  document.querySelectorAll("[data-board]").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  renderBoard();
+}));
+
+async function loadBoard() {
+  if (boardLoading) return;
+  boardLoading = true;
+  try {
+    boardData = await api("leaderboard");
+    renderBoard();
+  } catch (e) {
+    $("boardWrap").innerHTML = `<div class="empty">โหลดอันดับไม่สำเร็จ: ${escapeHtml(e.message)}</div>`;
+  } finally {
+    boardLoading = false;
+  }
+}
+
+function renderBoard() {
+  const wrap = $("boardWrap");
+  if (!boardData) return;
+  const myName = session ? session.name : null;
+  const myTeam = session ? session.profile.team : null;
+
+  if (boardMode === "team") {
+    const teams = boardData.teams || [];
+    if (!teams.length) { wrap.innerHTML = `<div class="empty">ยังไม่มีทีมที่มีสมาชิก</div>`; return; }
+    wrap.innerHTML = `
+      <div class="table-wrap">
+        <table class="data-table stack">
+          <thead><tr><th>อันดับ</th><th>ทีม</th><th class="num">ก้าวจริงสะสม</th><th class="num">โบนัสสะสม</th><th class="num">ก้าวรวมทีม</th></tr></thead>
+          <tbody>
+            ${teams.map(t => `
+              <tr class="${t.name === myTeam ? "me" : ""}">
+                <td class="rank-cell">${t.rank}</td>
+                <td class="name-cell">${escapeHtml(t.name)}${t.name === myTeam ? '<span class="you">ทีมคุณ</span>' : ""}
+                  <span class="member-line">${escapeHtml(t.members.map(m => m.name).join(", "))} (${t.count} คน)</span></td>
+                <td class="num" data-label="ก้าวจริง">${fmt(t.steps)}</td>
+                <td class="num" data-label="โบนัส">${fmt(t.bonus)}</td>
+                <td class="num total-col" data-label="รวมทีม">${fmt(t.total)}</td>
+              </tr>`).join("")}
+          </tbody>
+        </table>
+      </div>`;
+    return;
+  }
+
+  const rows = boardData.rows || [];
+  if (!rows.length) { wrap.innerHTML = `<div class="empty">ยังไม่มีผู้เข้าร่วม</div>`; return; }
+  wrap.innerHTML = `
+    <div class="table-wrap">
+      <table class="data-table stack">
+        <thead><tr><th>อันดับ</th><th>ชื่อ</th><th class="num">ก้าวจริงสะสม</th><th class="num">โบนัสสะสม</th><th class="num">ก้าวรวมสะสม</th></tr></thead>
+        <tbody>
+          ${rows.map(r => `
+            <tr class="${r.name === myName ? "me" : ""}">
+              <td class="rank-cell">${r.rank}</td>
+              <td class="name-cell">${escapeHtml(r.name)}${r.name === myName ? '<span class="you">คุณ</span>' : ""}
+                ${r.team ? `<span class="member-line">${escapeHtml(r.team)}</span>` : ""}</td>
+              <td class="num" data-label="ก้าวจริง">${fmt(r.steps)}</td>
+              <td class="num" data-label="โบนัส">${fmt(r.bonus)}</td>
+              <td class="num total-col" data-label="รวม">${fmt(r.total)}</td>
+            </tr>`).join("")}
+        </tbody>
+      </table>
+    </div>`;
+}
+
+$("refreshBoard").addEventListener("click", loadBoard);
+
+/* =========================================================
+   Lightbox + demo reset
+   ========================================================= */
+
+$("historyWrap").addEventListener("click", e => {
+  const b = e.target.closest(".thumb");
+  if (!b || !myData) return;
+  const entry = myData.entries[Number(b.dataset.entry)];
+  if (!entry || !entry.evidenceThumb) return;
+  $("lightboxImg").src = entry.evidenceThumb;
+  const dlg = $("lightbox");
+  if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+});
+$("lightboxClose").addEventListener("click", () => $("lightbox").close());
+$("lightbox").addEventListener("click", e => { if (e.target.id === "lightbox") $("lightbox").close(); });
+
+$("resetDemo").addEventListener("click", () => {
+  if (!confirm("ล้างผู้เข้าร่วม ก้าว และรูปทั้งหมดในโหมดทดลอง?")) return;
+  try { localStorage.removeItem(DEMO_KEY); localStorage.removeItem(SESSION_KEY); } catch (_) {}
+  location.reload();
+});
+
+/* =========================================================
+   Init
+   ========================================================= */
+
+(function init() {
+  $("demoBanner").hidden = !!API_URL;
+  renderRules();
+  ["logDate", "regDate"].forEach(id => { $(id).value = todayISO(); $(id).max = todayISO(); });
+  loadSession();
+  updateTabs();
+  go(location.hash.slice(1));
+  if (session) refreshMine();
+})();
+</script>
+</body>
+</html>
